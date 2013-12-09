@@ -1,0 +1,60 @@
+<!doctype>
+<head>
+	<link type="text/css" rel="stylesheet" href="../src/css/graph.css">
+	<link type="text/css" rel="stylesheet" href="../src/css/detail.css">
+	<link type="text/css" rel="stylesheet" href="css/triChart.css">
+
+	<script src="../3js.js"></script>
+</head>
+<body>
+<div id="chart_container">
+	<div id="chart"></div>
+</div>
+
+<script>
+
+
+  /*
+  if line must be closed, then last element of data must be equal to first element
+  */
+var json1={data:[
+  {a:150,b:330,c:300},
+  {a:150,b:332,c:18},
+  {a:146,b:340,c:14},
+  {a:140,b:340,c:20},
+  {a:110,b:300,c:20},
+],id:'data_1',color:'red',width:2,coordLabels:true};
+
+var chartData = new Lib.Fixtures.ChartData();
+var s1=new Lib.Fixtures.SeriesJson(json1);
+//var s1 = new Lib.Fixtures.SeriesTriang('red','data_1');
+/*
+s1.addPoint(50,30,20,'1');
+s1.addPoint(60,30,10,'2');
+s1.addPoint(46,24,30,'3');
+s1.addPoint(34,24,4,'4');
+s1.addPoint(30,24,42,'5');
+*/
+chartData.addSeries(s1);
+
+var graph = new Lib.TriAngChart( {
+	parentElement: document.getElementById("chart"),
+	edgeLength: 500,
+  paddings:70,
+  delimers:10,
+  axisA:{min:100,max:300,color:'red'},
+  axisB:{min:300,max:600,color:'green'},
+  axisC:{min:100,max:300,color:'blue'},
+  gridWidth:0.3,
+	renderer: 'line',
+	chartData: chartData
+} );
+
+
+var hoverDetail = new Lib.TriAngChart.HoverDetail( {
+	graph: graph
+} );
+
+</script>
+
+</body>
